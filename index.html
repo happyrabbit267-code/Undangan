@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Undangan Muscab & Pelantikan Pengurus LBH Sikap</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+forest: {
+800: '#0F4C3A',
+900: '#093327',
+950: '#051F18',
+},
+brass: {
+300: '#E7CFA0',
+400: '#D4B06A',
+500: '#B88E3E',
+600: '#9A7228',
+},
+ivory: '#FAF8F3'
+},
+fontFamily: {
+display: ['Playfair Display', 'serif'],
+sans: ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script>
+
+<!-- Fungsi Buka Undangan -->
+<script>
+function bukaUndangan() {
+var cover = document.getElementById('coverOverlay');
+var main = document.getElementById('mainWrapper');
+var body = document.body;
+
+if (main) {
+main.classList.remove('hidden');
+main.style.display = 'block';
+}
+
+if (body) {
+body.classList.remove('overflow-hidden');
+body.style.overflow = 'auto';
+}
+
+if (cover) {
+cover.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+cover.style.opacity = '0';
+cover.style.transform = 'translateY(-100%)';
+cover.style.pointerEvents = 'none';
+
+setTimeout(function () {
+cover.style.display = 'none';
+if (typeof checkScrollAnimations === 'function') {
+checkScrollAnimations();
+}
+}, 600);
+}
+}
+</script>
+
+<style>
+.hero-texture {
+background-color: #051F18;
+background-image: linear-gradient(135deg, rgba(212, 176, 106, 0.08) 25%, transparent 25%),
+linear-gradient(225deg, rgba(212, 176, 106, 0.08) 25%, transparent 25%),
+linear-gradient(45deg, rgba(212, 176, 106, 0.08) 25%, transparent 25%),
+linear-gradient(315deg, rgba(212, 176, 106, 0.08) 25%, #051F18 25%);
+background-position: 20px 0, 20px 0, 0 0, 0 0;
+background-size: 40px 40px;
+}
+
+.fade-up {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-up.visible {
+opacity: 1;
+transform: translateY(0);
+}
+</style>
+</head>
+<body class="font-sans bg-ivory text-stone-800 antialiased overflow-hidden">
+
+<!-- ==================== 1. HALAMAN SAMPUL (COVER) ==================== -->
+<div id="coverOverlay" style="position: fixed; inset: 0; z-index: 9999;" class="hero-texture text-white flex items-center justify-center p-4 sm:p-8">
+<div class="w-full max-w-2xl border border-brass-400/40 rounded-3xl p-2 sm:p-3 bg-forest-950/70 backdrop-blur-md shadow-2xl">
+<div class="border border-brass-400/25 rounded-2xl px-6 py-10 sm:px-12 sm:py-12 text-center flex flex-col items-center">
+
+<!-- Ikon Timbangan Keadilan -->
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brass-400 to-brass-600 p-0.5 mb-6 shadow-lg">
+<div class="w-full h-full bg-forest-950 rounded-[14px] flex items-center justify-center">
+<svg class="w-8 h-8 text-brass-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m-7-4h14M5 7l7-2 7 2M5 7l-2 5h4L5 7zm14 0l-2 5h4l-2-5z" />
+</svg>
+</div>
+</div>
+
+<p class="text-xs uppercase tracking-[0.28em] text-brass-300 font-semibold mb-3">
+Undangan Resmi
+</p>
+
+<h1 class="font-display text-2xl sm:text-4xl font-bold leading-tight text-white mb-2">
+Musyawarah Cabang & Pelantikan Pengurus
+</h1>
+
+<p class="font-display italic text-lg sm:text-xl text-brass-400 mb-6">
+Lembaga Bantuan Hukum (LBH) Sikap
+</p>
+
+<div class="flex items-center gap-3 text-xs sm:text-sm text-stone-300 mb-8">
+<span class="h-px w-8 bg-brass-500/50"></span>
+<span>Sabtu, 12 Desember 2026</span>
+<span class="h-px w-8 bg-brass-500/50"></span>
+</div>
+
+<!-- Kartu Penerima Undangan -->
+<div class="w-full max-w-sm bg-forest-900/90 border border-brass-400/30 rounded-xl px-5 py-4 mb-8">
+<p class="text-[11px] uppercase tracking-widest text-stone-400 mb-1">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+<p id="coverGuestName" class="text-base sm:text-lg font-bold text-white">Tamu Undangan Kehormatan</p>
+</div>
+
+<!-- Tombol Buka Undangan -->
+<button
+type="button"
+id="btnOpenInvite"
+onclick="bukaUndangan()"
+class="relative z-10 inline-flex items-center gap-2.5 bg-brass-400 hover:bg-brass-300 active:scale-95 text-forest-950 font-bold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-lg shadow-black/30 transition cursor-pointer"
+>
+<svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+</svg>
+<span class="pointer-events-none">Buka Undangan</span>
+</button>
+
+</div>
+</div>
+</div>
+
+<!-- ==================== 2. KONTEN UTAMA WEBSITE ==================== -->
+<div id="mainWrapper" style="display: none;">
+
+<!-- Navbar Minimalis -->
+<nav class="sticky top-0 z-40 bg-forest-950/95 backdrop-blur border-b border-brass-500/20 text-white">
+<div class="max-w-5xl mx-auto px-5 py-3.5 flex items-center justify-between">
+<span class="font-display font-bold text-brass-400 tracking-wide text-base sm:text-lg">LBH SIKAP</span>
+<div class="flex items-center gap-5 text-xs sm:text-sm text-stone-300">
+<a href="#sambutan-section" class="hover:text-brass-300 transition">Sambutan</a>
+<a href="#countdown-section" class="hover:text-brass-300 transition">Waktu</a>
+<a href="#lokasi-section" class="hover:text-brass-300 transition">Lokasi</a>
+</div>
+</div>
+</nav>
+
+<!-- Header Pembuka -->
+<header id="sambutan-section" class="hero-texture text-white py-20 px-6 text-center">
+<div class="max-w-3xl mx-auto fade-up">
+<span class="inline-block px-3.5 py-1 rounded-full bg-brass-500/20 border border-brass-400/30 text-brass-300 text-xs font-semibold tracking-widest uppercase mb-4">
+Salam Keadilan & Konstitusi
+</span>
+<h2 class="font-display text-3xl sm:text-5xl font-bold leading-tight mb-5">
+Musyawarah Cabang & Pelantikan Pengurus
+</h2>
+<p class="text-stone-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+Dengan hormat, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri forum tertinggi organisasi tingkat cabang serta prosesi pelantikan jajaran pengurus baru <strong>Lembaga Bantuan Hukum (LBH) Sikap</strong>.
+</p>
+</div>
+</header>
+
+<!-- ==================== 3. HITUNG MUNDUR (COUNTDOWN TIMER) ==================== -->
+<section id="countdown-section" class="py-16 px-6 bg-white border-b border-stone-200/80">
+<div class="max-w-4xl mx-auto text-center fade-up">
+<p class="text-xs font-bold uppercase tracking-[0.2em] text-brass-600 mb-2">Waktu Pelaksanaan</p>
+<h3 class="font-display text-2xl sm:text-3xl font-bold text-forest-950 mb-1">
+Sabtu, 12 Desember 2026
+</h3>
+<p class="text-stone-500 text-sm mb-8">Mulai pukul 08.00 WIB hingga selesai</p>
+
+<!-- Kotak Countdown -->
+<div class="grid grid-cols-4 gap-3 sm:gap-5 max-w-xl mx-auto">
+<div class="bg-forest-950 text-white rounded-2xl py-5 px-2 shadow-md border border-brass-500/30">
+<span id="cd-days" class="font-display text-2xl sm:text-4xl font-bold text-brass-400 block">00</span>
+<span class="text-[11px] sm:text-xs uppercase tracking-wider text-stone-300 mt-1 block">Hari</span>
+</div>
+<div class="bg-forest-950 text-white rounded-2xl py-5 px-2 shadow-md border border-brass-500/30">
+<span id="cd-hours" class="font-display text-2xl sm:text-4xl font-bold text-brass-400 block">00</span>
+<span class="text-[11px] sm:text-xs uppercase tracking-wider text-stone-300 mt-1 block">Jam</span>
+</div>
+<div class="bg-forest-950 text-white rounded-2xl py-5 px-2 shadow-md border border-brass-500/30">
+<span id="cd-minutes" class="font-display text-2xl sm:text-4xl font-bold text-brass-400 block">00</span>
+<span class="text-[11px] sm:text-xs uppercase tracking-wider text-stone-300 mt-1 block">Menit</span>
+</div>
+<div class="bg-forest-950 text-white rounded-2xl py-5 px-2 shadow-md border border-brass-500/30">
+<span id="cd-seconds" class="font-display text-2xl sm:text-4xl font-bold text-brass-400 block">00</span>
+<span class="text-[11px] sm:text-xs uppercase tracking-wider text-stone-300 mt-1 block">Detik</span>
+</div>
+</div>
+
+<p id="cd-finished" class="hidden mt-6 text-sm font-semibold text-forest-800 bg-brass-300/30 border border-brass-400 rounded-xl py-3 px-4 max-w-md mx-auto">
+Acara Muscab & Pelantikan Pengurus LBH Sikap telah dimulai.
+</p>
+
+<!-- Info Dress Code Ringkas -->
+<div class="mt-8 inline-block bg-ivory border border-stone-200 rounded-xl px-5 py-3 text-xs sm:text-sm text-stone-700">
+<span class="font-bold text-forest-900">Dress Code:</span> Batik Nasional Lengan Panjang / Jas Resmi Organisasi
+</div>
+</div>
+</section>
+
+<!-- ==================== 4. LOKASI GOOGLE MAPS ==================== -->
+<section id="lokasi-section" class="py-16 px-6 bg-ivory">
+<div class="max-w-4xl mx-auto fade-up">
+<div class="text-center mb-8">
+<p class="text-xs font-bold uppercase tracking-[0.2em] text-brass-600 mb-2">Tempat Acara</p>
+<h3 class="font-display text-2xl sm:text-3xl font-bold text-forest-950">Lokasi Pelaksanaan</h3>
+<p id="venueAddress" class="text-stone-600 text-sm sm:text-base mt-2">
+<strong>Gedung Pertemuan Utama Semarang</strong> — Jl. Pandanaran No. 102, Mugassari, Kec. Semarang Selatan, Kota Semarang, Jawa Tengah
+</p>
+</div>
+
+<!-- Peta Google Maps -->
+<div class="rounded-3xl overflow-hidden shadow-md border border-stone-200 bg-white">
+<iframe
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.198531942652!2d110.41502237587687!3d-6.985880568414552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b4ec52229d7%3A0xc791d6abc9236c7!2sSimpang%20Lima%20Semarang!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+class="w-full h-80 sm:h-96 border-0"
+allowfullscreen=""
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade"
+title="Lokasi Google Maps Muscab LBH Sikap">
+</iframe>
+</div>
+
+<!-- Tombol Aksi Lokasi -->
+<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+<a
+href="https://maps.google.com/?q=Simpang+Lima+Semarang"
+target="_blank"
+rel="noopener noreferrer"
+class="inline-flex items-center gap-2 bg-forest-900 hover:bg-forest-800 text-white text-sm font-semibold px-6 py-3 rounded-xl shadow transition"
+>
+<svg class="w-4 h-4 text-brass-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+<path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+</svg>
+Petunjuk Arah Google Maps
+</a>
+
+<button type="button" id="copyAddressBtn" onclick="salinAlamat()" class="inline-flex items-center gap-2 bg-white hover:bg-stone-100 text-forest-950 border border-stone-300 text-sm font-semibold px-5 py-3 rounded-xl transition cursor-pointer">
+<svg class="w-4 h-4 text-brass-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+</svg>
+<span id="copyBtnText">Salin Alamat</span>
+</button>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-forest-950 text-stone-400 py-10 px-6 text-center text-xs sm:text-sm">
+<p class="font-display text-base sm:text-lg font-bold text-white mb-1">Panitia Muscab & Pelantikan Pengurus</p>
+<p class="text-brass-400 mb-4">Lembaga Bantuan Hukum (LBH) Sikap • 2026</p>
+<p class="text-stone-500 text-xs">Atas perhatian dan kehadiran Bapak/Ibu/Saudara/i, kami ucapkan terima kasih.</p>
+</footer>
+
+</div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// 1. Baca nama tamu dari URL (?to=Nama+Tamu)
+try {
+var params = new URLSearchParams(window.location.search);
+var guestNameParam = params.get('to');
+if (guestNameParam && guestNameParam.trim() !== '') {
+document.getElementById('coverGuestName').textContent = guestNameParam;
+}
+} catch (e) {}
+
+// 2. Countdown Timer ke 12 Desember 2026 pukul 08:00 WIB
+var targetDate = new Date('2026-12-12T08:00:00+07:00').getTime();
+
+function refreshTimer() {
+var now = Date.now();
+var diff = targetDate - now;
+
+if (diff <= 0) {
+document.getElementById('cd-days').textContent = '00';
+document.getElementById('cd-hours').textContent = '00';
+document.getElementById('cd-minutes').textContent = '00';
+document.getElementById('cd-seconds').textContent = '00';
+document.getElementById('cd-finished').classList.remove('hidden');
+return;
+}
+
+var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+var s = Math.floor((diff % (1000 * 60)) / 1000);
+
+document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+document.getElementById('cd-minutes').textContent = String(m).padStart(2, '0');
+document.getElementById('cd-seconds').textContent = String(s).padStart(2, '0');
+}
+
+refreshTimer();
+setInterval(refreshTimer, 1000);
+
+// 3. Fitur Salin Alamat Lokasi
+function salinAlamat() {
+var addressText = document.getElementById('venueAddress').innerText;
+var copyBtnText = document.getElementById('copyBtnText');
+if (navigator.clipboard && navigator.clipboard.writeText) {
+navigator.clipboard.writeText(addressText).then(function () {
+copyBtnText.textContent = 'Alamat Tersalin!';
+setTimeout(function () { copyBtnText.textContent = 'Salin Alamat'; }, 2500);
+});
+}
+}
+
+// 4. Animasi Scroll
+function checkScrollAnimations() {
+var els = document.querySelectorAll('.fade-up');
+for (var i = 0; i < els.length; i++) {
+if (els[i].getBoundingClientRect().top < window.innerHeight - 50) {
+els[i].classList.add('visible');
+}
+}
+}
+window.addEventListener('scroll', checkScrollAnimations);
+</script>
+</body>
+</html>
